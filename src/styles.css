@@ -870,6 +870,192 @@ kbd {
   gap: 8px 18px;
 }
 
+.preview {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  background: #10131a;
+}
+
+.chrome {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 34px;
+  padding: 0 12px;
+  background: color-mix(in srgb, var(--bg) 78%, #000);
+  border-bottom: 1px solid var(--line);
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.chrome-lights {
+  display: flex;
+  gap: 5px;
+}
+
+.chrome-lights i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3a3f4d;
+}
+
+.chrome-lights i:first-child { background: #ff5a2a; }
+.chrome-lights i:nth-child(2) { background: #9a3412; }
+
+.chrome-title {
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.preview picture,
+.preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.preview img {
+  background: #10131a;
+}
+
+.gesture-stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(243, 239, 230, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(243, 239, 230, 0.05) 1px, transparent 1px),
+    #0c0e14;
+  background-size: 32px 32px, 32px 32px, auto;
+}
+
+.g-mover {
+  position: absolute;
+  inset: 0;
+}
+
+.g-win-mover { animation: win-path 9s cubic-bezier(0.45, 0.05, 0.2, 1) infinite; }
+.g-hand-mover { animation: hand-path 9s cubic-bezier(0.45, 0.05, 0.2, 1) infinite; }
+
+.g-window {
+  position: absolute;
+  left: 7%;
+  top: 14%;
+  width: 44%;
+  height: 60%;
+  border: 1px solid rgba(243, 239, 230, 0.18);
+  border-radius: 10px;
+  background: #161922;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+.g-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 28px;
+  padding: 0 10px;
+  border-bottom: 1px solid rgba(243, 239, 230, 0.1);
+  color: #f3efe6;
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 11px;
+}
+
+.g-titlebar i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff5a2a;
+}
+
+.g-lines {
+  display: grid;
+  gap: 8px;
+  padding: 14px 12px;
+}
+
+.g-lines span {
+  display: block;
+  height: 6px;
+  border-radius: 99px;
+  background: rgba(243, 239, 230, 0.16);
+}
+
+.g-lines span:nth-child(1) { width: 78%; }
+.g-lines span:nth-child(2) { width: 92%; }
+.g-lines span:nth-child(3) { width: 54%; }
+
+.g-hand {
+  position: absolute;
+  left: 10%;
+  top: 2%;
+  width: 32%;
+  z-index: 2;
+  filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.4));
+}
+
+.g-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  stroke: #f3efe6;
+  fill: none;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.g-index,
+.g-thumb {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+
+.g-index { animation: index-pinch 9s ease-in-out infinite; }
+.g-thumb { animation: thumb-pinch 9s ease-in-out infinite; }
+
+.g-cursor {
+  position: absolute;
+  left: 22%;
+  top: 28%;
+  width: 16px;
+  height: 16px;
+  fill: #ff5a2a;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+}
+
+.g-ripple {
+  position: absolute;
+  left: 20%;
+  top: 27%;
+  width: 28px;
+  height: 28px;
+  border: 2px solid #ff5a2a;
+  border-radius: 50%;
+  animation: pinch-click 9s ease-out infinite;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .preview img {
+    transition: transform 0.7s cubic-bezier(0.16, 0.8, 0.2, 1);
+  }
+
+  .project:hover .preview img {
+    transform: scale(1.035);
+  }
+
+  .project:hover .preview {
+    border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  }
+}
+
 .arena {
   background: color-mix(in srgb, var(--card) 65%, transparent);
   border-radius: 28px;
@@ -1403,6 +1589,10 @@ kbd {
   .dot { animation: none; }
   .ticker-track { animation: none; }
   .core.is-live .core-fallback { transition: none; }
+  .g-win-mover { animation: none; transform: translate(26%, 12%); }
+  .g-hand-mover { animation: none; transform: translate(34%, 12%); }
+  .g-index, .g-thumb { animation: none; transform: none; }
+  .g-ripple { animation: none; opacity: 0; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -1417,6 +1607,37 @@ kbd {
 
 @keyframes pulse {
   50% { opacity: 0.45; }
+}
+
+@keyframes win-path {
+  0%, 36% { transform: translate(0, 0); }
+  70%, 86% { transform: translate(26%, 12%); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes hand-path {
+  0%, 8% { transform: translate(0, 16%); }
+  26%, 38% { transform: translate(8%, 0); }
+  70%, 84% { transform: translate(34%, 12%); }
+  100% { transform: translate(0, 16%); }
+}
+
+@keyframes index-pinch {
+  0%, 12% { transform: translate(6px, -28px) rotate(-32deg); }
+  28%, 80% { transform: none; }
+  94%, 100% { transform: translate(6px, -28px) rotate(-32deg); }
+}
+
+@keyframes thumb-pinch {
+  0%, 12% { transform: translate(-8px, 10px) rotate(24deg); }
+  28%, 80% { transform: none; }
+  94%, 100% { transform: translate(-8px, 10px) rotate(24deg); }
+}
+
+@keyframes pinch-click {
+  0%, 26% { opacity: 0; transform: scale(0.4); }
+  34% { opacity: 1; transform: scale(1); }
+  48%, 100% { opacity: 0; transform: scale(1.6); }
 }
 
 @supports (animation-timeline: view()) {

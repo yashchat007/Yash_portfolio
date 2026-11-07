@@ -35,6 +35,8 @@ The wireframe beside the portrait is a small WebGL module, loaded after the wind
 
 The object is the work: an outer shell for the problem graph, a core for the local agent, and three satellites for LeetCode, Codeforces, and takeUforward. Pointer movement tilts it. It pauses off screen.
 
+FRIDAY, RoleRadar, and CineCircle cards show a framed preview of the real interface, in AVIF and WebP, loaded lazily below the fold. Gesture Control has no screenshot, so its card plays a small hand animation: pinch to click, then drag a window. That animation holds a still pinch when the visitor prefers reduced motion.
+
 Section titles are `h2` elements. Each project card is the problem, what was built, and one engineering decision already present in the work:
 
 - FRIDAY keeps browser and OS actions behind an approval gate.
